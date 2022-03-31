@@ -33,7 +33,7 @@ public class BodegaController {
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
-    @GetMapping(value = "bodega/{id}")
+    @GetMapping(value = "/bodega/{id}")
     private Mono<String> getById(@PathVariable String id){
         return Mono.just(this.iBodegaService.findById(id).block().toString());
     }

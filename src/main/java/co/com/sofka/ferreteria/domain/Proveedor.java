@@ -11,6 +11,7 @@ public class Proveedor {
     private String celular;
 
     public Proveedor() {
+
     }
 
     public Proveedor(String documento, String nombre, String celular) {

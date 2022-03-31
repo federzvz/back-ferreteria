@@ -34,7 +34,7 @@ public class ProductoController {
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
-    @GetMapping(value = "producto/{id}")
+    @GetMapping(value = "/producto/{id}")
     private Mono<String> getById(@PathVariable String id){
         return Mono.just(this.iProductoService.findById(id).block().toString());
     }

@@ -33,7 +33,7 @@ public class ClienteController {
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
-    @GetMapping(value = "cliente/{id}")
+    @GetMapping(value = "/cliente/{id}")
     private Mono<String> getById(@PathVariable String id){
         return Mono.just(this.iClienteService.findByDocumento(id).block().toString());
     }
