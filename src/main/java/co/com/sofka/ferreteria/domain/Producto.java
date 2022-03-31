@@ -10,14 +10,24 @@ public class Producto {
     @Id
     private String id = UUID.randomUUID().toString().substring(0, 20);
     private String nombre;
+    private Double precio;
     private String descripcion;
 
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion) {
+    public Producto(String nombre, Double precio, String descripcion) {
         this.nombre = nombre;
+        this.precio = precio;
         this.descripcion = descripcion;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 
     public String getId() {
@@ -49,6 +59,7 @@ public class Producto {
         return "Producto{" +
                 "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
+                ", precio=" + precio +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }

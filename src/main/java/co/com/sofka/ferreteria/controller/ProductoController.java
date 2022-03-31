@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-public class FerreteriaController {
+public class ProductoController {
 
     @Autowired
     private IProductoService iProductoService;
@@ -19,15 +19,25 @@ public class FerreteriaController {
     @PostMapping("/producto")
     @ResponseStatus(HttpStatus.CREATED)
     private Mono<Producto> save(@RequestBody Producto producto) {
-        return iProductoService.save(producto);
+        return this.iProductoService.save(producto);
     }
 
-    @GetMapping(value = "/producto/get")
+    @GetMapping(value = "/producto")
     private Flux<Producto> findAll() {
-        int x=2;
         return this.iProductoService.findAll();
     }
 
+    @PutMapping(value = "/producto/{id}")
+    private Mono<ResponseEntity<Producto>> update(@PathVariable("id") String id, @RequestBody Producto producto) {
+        return this.iProductoService.update(id, producto)
+                .flatMap(p -> Mono.just(ResponseEntity.ok(p)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+    }
+
+    @GetMapping(value = "producto/{id}")
+    private Mono<String> getById(@PathVariable String id){
+        return Mono.just(this.iProductoService.findById(id).block().toString());
+    }
 
 
     /*@RequestMapping(value = PATH)

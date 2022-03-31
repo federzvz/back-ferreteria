@@ -29,7 +29,7 @@ public class ProductoService implements IProductoService {
     @Override
     public Mono<Producto> update(String id, Producto producto){
         return this.iProductoRepository.findById(id)
-                .flatMap(citasDTOReactiva1 -> {
+                .flatMap(p -> {
                     producto.setId(id);
                     return save(producto);
                 })

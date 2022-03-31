@@ -6,25 +6,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "bodegas")
 public class Bodega {
     @Id
-    private String IdProducto;
+    private String id;
     private Producto producto;
     private Integer stock;
 
     public Bodega() {
     }
 
-    public Bodega(String idProducto, Producto producto, Integer stock) {
-        IdProducto = idProducto;
+    public Bodega(String id, Producto producto, Integer stock) {
+        this.id = id;
         this.producto = producto;
         this.stock = stock;
     }
 
-    public String getIdProducto() {
-        return IdProducto;
+    public String getId() {
+        return id;
     }
 
-    public void setIdProducto(String idProducto) {
-        IdProducto = idProducto;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Producto getProducto() {
@@ -46,7 +46,7 @@ public class Bodega {
     @Override
     public String toString() {
         return "Bodega{" +
-                "IdProducto='" + IdProducto + '\'' +
+                "id='" + id + '\'' +
                 ", producto=" + producto +
                 ", stock=" + stock +
                 '}';
