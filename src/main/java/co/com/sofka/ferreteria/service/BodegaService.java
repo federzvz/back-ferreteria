@@ -4,9 +4,11 @@ import co.com.sofka.ferreteria.domain.Bodega;
 import co.com.sofka.ferreteria.repository.IBodegaRepository;
 import co.com.sofka.ferreteria.service.icontroller.IBodegaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service
 public class BodegaService implements IBodegaService {
 
     @Autowired
