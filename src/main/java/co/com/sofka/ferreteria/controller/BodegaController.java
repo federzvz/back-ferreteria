@@ -10,30 +10,32 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/bodega")
 public class BodegaController {
 
     @Autowired
     private IBodegaService iBodegaService;
 
-    @PostMapping("/bodega")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     private Mono<Bodega> save(@RequestBody Bodega bodega) {
         return this.iBodegaService.save(bodega);
     }
 
-    @GetMapping(value = "/bodega")
+    @GetMapping(value = "/")
     private Flux<Bodega> findAll() {
         return this.iBodegaService.findAll();
     }
 
-    @PutMapping(value = "/bodega/{id}")
+    @PutMapping(value = "/{id}")
     private Mono<ResponseEntity<Bodega>> update(@PathVariable("id") String id, @RequestBody Bodega bodega) {
         return this.iBodegaService.update(id, bodega)
                 .flatMap(b -> Mono.just(ResponseEntity.ok(b)))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
-    @GetMapping(value = "/bodega/{id}")
+    @GetMapping(value = "/{id}")
     private Mono<String> getById(@PathVariable String id){
         return Mono.just(this.iBodegaService.findById(id).block().toString());
     }

@@ -10,31 +10,33 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@RequestMapping("/producto")
+@CrossOrigin(origins = "*")
 public class ProductoController {
 
     @Autowired
     private IProductoService iProductoService;
     //static final String PATH ="/error";
 
-    @PostMapping("/producto")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     private Mono<Producto> save(@RequestBody Producto producto) {
         return this.iProductoService.save(producto);
     }
 
-    @GetMapping(value = "/producto")
+    @GetMapping(value = "/")
     private Flux<Producto> findAll() {
         return this.iProductoService.findAll();
     }
 
-    @PutMapping(value = "/producto/{id}")
+    @PutMapping(value = "/{id}")
     private Mono<ResponseEntity<Producto>> update(@PathVariable("id") String id, @RequestBody Producto producto) {
         return this.iProductoService.update(id, producto)
                 .flatMap(p -> Mono.just(ResponseEntity.ok(p)))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
-    @GetMapping(value = "/producto/{id}")
+    @GetMapping(value = "/{id}")
     private Mono<String> getById(@PathVariable String id){
         return Mono.just(this.iProductoService.findById(id).block().toString());
     }

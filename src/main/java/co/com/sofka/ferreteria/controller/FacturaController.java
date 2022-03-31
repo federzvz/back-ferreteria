@@ -10,29 +10,31 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/factura")
 public class FacturaController {
     @Autowired
     private IFacturaService iFacturaService;
 
-    @PostMapping("/factura")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     private Mono<Factura> save(@RequestBody Factura factura) {
         return this.iFacturaService.save(factura);
     }
 
-    @GetMapping(value = "/factura")
+    @GetMapping(value = "/")
     private Flux<Factura> findAll() {
         return this.iFacturaService.findAll();
     }
 
-    @PutMapping(value = "/factura/{id}")
+    @PutMapping(value = "/{id}")
     private Mono<ResponseEntity<Factura>> update(@PathVariable("id") String id, @RequestBody Factura factura) {
         return this.iFacturaService.update(id, factura)
                 .flatMap(f -> Mono.just(ResponseEntity.ok(f)))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
-    @GetMapping(value = "/factura/{id}")
+    @GetMapping(value = "/{id}")
     private Mono<String> getById(@PathVariable String id){
         return Mono.just(this.iFacturaService.findById(id).block().toString());
     }
