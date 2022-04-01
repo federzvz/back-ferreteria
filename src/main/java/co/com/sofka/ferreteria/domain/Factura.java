@@ -22,7 +22,7 @@ public class Factura {
     }
 
     public Factura(LocalDate fecha, String nombreCliente, String nombreEmpleado, List<Producto> productosComprados, Integer precioTotalAPagar) {
-        Fecha = fecha;
+        this.Fecha = fecha;
         this.nombreCliente = nombreCliente;
         this.nombreEmpleado = nombreEmpleado;
         this.productosComprados = productosComprados;
