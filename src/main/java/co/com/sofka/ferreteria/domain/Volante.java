@@ -1,12 +1,17 @@
 package co.com.sofka.ferreteria.domain;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
-@Document(collection = "proveedores")
+@Document(collection = "volantes")
 public class Volante {
+
+    @Id
+    private String id = UUID.randomUUID().toString().substring(0, 20);
     private String nombreProveedor;
     private List<Producto> productoListAIngresar;
     private LocalDate fecha;
@@ -20,6 +25,14 @@ public class Volante {
         this.productoListAIngresar = productoListAIngresar;
         this.fecha = fecha;
         this.documentoProveedor = documentoProveedor;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombreProveedor() {
