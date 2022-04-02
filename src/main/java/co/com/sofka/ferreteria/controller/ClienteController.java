@@ -1,5 +1,6 @@
 package co.com.sofka.ferreteria.controller;
 
+import co.com.sofka.ferreteria.DTOs.ClienteDTO;
 import co.com.sofka.ferreteria.domain.Cliente;
 import co.com.sofka.ferreteria.service.icontroller.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,22 @@ public class ClienteController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    private Mono<Cliente> save(@RequestBody Cliente cliente) {
-        return this.iClienteService.save(cliente);
+    private Mono<ClienteDTO> save(@RequestBody ClienteDTO clienteDTO) {
+        Cliente c = new Cliente(clienteDTO.getDocumento(), clienteDTO.getNombre(), clienteDTO.getCelular());
+        return this.iClienteService.save(c).thenReturn(clienteDTO);
     }
 
     @GetMapping(value = "/")
-    private Flux<Cliente> findAll() {
-        return this.iClienteService.findAll();
+    private Flux<ClienteDTO> findAll() {
+        return this.iClienteService.findAll().map(c -> new ClienteDTO(c.getDocumento(),c.getNombre(),c.getCelular()));
     }
 
     @PutMapping(value = "/{id}")
-    private Mono<ResponseEntity<Cliente>> update(@PathVariable("id") String id, @RequestBody Cliente cliente) {
-        return this.iClienteService.update(id, cliente)
+    private Mono<ResponseEntity<Cliente>> update(@PathVariable("id") String id, @RequestBody ClienteDTO clienteDTO) {
+        return this.iClienteService.update(id, new Cliente(
+                clienteDTO.getDocumento(),
+                        clienteDTO.getNombre(),
+                        clienteDTO.getCelular()))
                 .flatMap(c -> Mono.just(ResponseEntity.ok(c)))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }

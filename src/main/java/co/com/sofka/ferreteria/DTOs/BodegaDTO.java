@@ -1,14 +1,16 @@
 package co.com.sofka.ferreteria.DTOs;
 
+import co.com.sofka.ferreteria.domain.Producto;
+
 public class BodegaDTO {
     private String id;
-    private ProductoDTO producto;
+    private Producto producto;
     private Integer stock;
 
     public BodegaDTO() {
     }
 
-    public BodegaDTO(String id, ProductoDTO producto, Integer stock) {
+    public BodegaDTO(String id, Producto producto, Integer stock) {
         this.id = id;
         this.producto = producto;
         this.stock = stock;
@@ -22,11 +24,11 @@ public class BodegaDTO {
         this.id = id;
     }
 
-    public ProductoDTO getProducto() {
-        return producto;
+    public Producto getProducto() {
+        return this.producto;
     }
 
-    public void setProducto(ProductoDTO producto) {
+    public void setProducto(Producto producto) {
         this.producto = producto;
     }
 

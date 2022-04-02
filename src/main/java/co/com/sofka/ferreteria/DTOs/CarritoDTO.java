@@ -1,5 +1,9 @@
 package co.com.sofka.ferreteria.DTOs;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
+
 public class CarritoDTO {
     private String id = UUID.randomUUID().toString().substring(0, 20);
     private LocalDate Fecha;
