@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/proveedor")
+@RequestMapping("/volante")
 public class VolanteController {
 
     @Autowired
